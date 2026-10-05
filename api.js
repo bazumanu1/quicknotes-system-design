@@ -56,7 +56,14 @@ function renderNotes(notes) {
     const body = document.createElement("p");
     body.textContent = note.body;
 
-    item.append(title, body);
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "delete-button";
+    deleteButton.type = "button";
+    deleteButton.dataset.noteId = note.id;
+    deleteButton.textContent = "Delete";
+    deleteButton.disabled = isRequestRunning;
+
+    item.append(title, body, deleteButton);
     notesList.appendChild(item);
   });
 }
@@ -118,5 +125,28 @@ async function createNote(event) {
   }
 }
 
+async function deleteNote(id) {
+  if (isRequestRunning) return;
+
+  setRequestBusy(true);
+  showStatus("Deleting note...", "loading");
+
+  try {
+    await request(`/${encodeURIComponent(id)}`, { method: "DELETE" });
+    // JSONPlaceholder confirms DELETE but does not persist changes, so remove this note from the current view only.
+    renderNotes(currentNotes.filter((note) => String(note.id) !== id));
+    showStatus("Note deleted from this view.", "success");
+  } catch (error) {
+    showStatus("We couldn't delete this note. Please try again.", "error");
+    console.error(error);
+  } finally {
+    setRequestBusy(false);
+  }
+}
+
 loadButton.addEventListener("click", loadNotes);
 noteForm.addEventListener("submit", createNote);
+notesList.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest(".delete-button");
+  if (deleteButton) deleteNote(deleteButton.dataset.noteId);
+});
