@@ -106,6 +106,20 @@ input:focus, textarea:focus { outline: 2px solid rgba(23, 107, 88, 0.28); border
 .button-outline { color: var(--green-dark); border-color: #9cb6a8; background: transparent; }
 .button-outline:hover:not(:disabled) { background: #e7eee7; }
 .button:disabled { cursor: wait; opacity: 0.58; }
+.delete-button {
+  min-height: 32px;
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 0 10px;
+  color: var(--muted);
+  background: transparent;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.delete-button:hover:not(:disabled) { color: var(--coral); border-color: var(--coral); background: #fff8f5; }
+.delete-button:disabled { cursor: wait; opacity: 0.58; }
 
 .notes-heading { justify-content: space-between; gap: 12px; margin-bottom: 10px; }
 .notes-heading .section-heading { margin-bottom: 0; }
