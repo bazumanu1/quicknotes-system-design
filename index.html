@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f4ed">
+  <title>QuickNotes API Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="api.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark" href="./">QuickNotes <span>API lab</span></a>
+    <p>Notes, fetched live from the practice API.</p>
+  </header>
+
+  <main>
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">PROJECT 02 / API CLIENT</p>
+      <h1 id="page-title">A place for<br>your next thought.</h1>
+      <p class="intro-copy">Load a sample collection, or send a new note to the server.</p>
+    </section>
+
+    <section class="workspace" aria-label="Notes workspace">
+      <div class="composer">
+        <div class="section-heading">
+          <span class="step">01</span>
+          <h2>Write a note</h2>
+        </div>
+        <form id="note-form">
+          <div class="field">
+            <label for="title-input">Title</label>
+            <input id="title-input" name="title" type="text" maxlength="100" required autocomplete="off" placeholder="A thought worth keeping">
+            <span class="field-hint">Up to 100 characters</span>
+          </div>
+          <div class="field">
+            <label for="body-input">Note</label>
+            <textarea id="body-input" name="body" rows="5" placeholder="Add a few details (optional)"></textarea>
+          </div>
+          <button id="submit-btn" class="button button-dark" type="submit">Create note <span aria-hidden="true">↗</span></button>
+        </form>
+      </div>
+
+      <div class="notes-panel">
+        <div class="notes-heading">
+          <div class="section-heading">
+            <span class="step">02</span>
+            <h2>Recent notes</h2>
+          </div>
+          <button id="load-btn" class="button button-outline" type="button">Load notes <span aria-hidden="true">↓</span></button>
+        </div>
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+        <ul id="notes-list" aria-label="Notes from the server"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer><span>QUICKNOTES</span><span>Practice client · JSONPlaceholder</span></footer>
+</body>
+</html>
